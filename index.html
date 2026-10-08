@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kinect IT – IT consultancy in Scotland</title>
+<meta name="description" content="Kinect IT designs and delivers IT for organisations from 10 to 150,000 users. Over 20 years across finance, government, education and private industry.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Semi+Condensed:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue: #215183;      /* logo */
+    --harbour: #0F2A47;   /* deep blue for dark bands */
+    --sphere: #7FA3CC;    /* sphere highlight */
+    --cloud: #F1F5F9;     /* alternate section ground */
+    --ink: #1B2633;
+    --muted: #4A5868;
+    --white: #FFFFFF;
+
+    --display: "Barlow Semi Condensed", "Barlow", system-ui, sans-serif;
+    --body: "Barlow", system-ui, sans-serif;
+
+    --wrap: 72rem;
+    --gutter: clamp(1.25rem, 4vw, 3rem);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    font: 400 1.125rem/1.6 var(--body);
+    color: var(--ink);
+    background: var(--white);
+  }
+  img { display: block; max-width: 100%; }
+  a { color: var(--blue); text-underline-offset: .2em; }
+  a:hover { color: var(--harbour); }
+  :focus-visible { outline: 3px solid var(--sphere); outline-offset: 3px; border-radius: 2px; }
+
+  h1, h2, h3 {
+    font-family: var(--display);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -.01em;
+    margin: 0;
+    color: var(--harbour);
+  }
+  h2 { font-size: clamp(2rem, 4vw, 2.75rem); }
+  h3 { font-size: 1.375rem; font-weight: 500; }
+  p { margin: 0; }
+
+  .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--gutter); }
+  .measure { max-width: 36em; }
+  .lead { font-size: 1.375rem; line-height: 1.5; color: var(--muted); }
+
+  .button {
+    display: inline-block;
+    font: 500 1.125rem/1 var(--body);
+    padding: 1.05rem 1.6rem;
+    background: var(--blue);
+    color: var(--white);
+    text-decoration: none;
+    border-radius: 999px;
+  }
+  .button:hover { background: var(--harbour); color: var(--white); }
+
+  .skip { position: absolute; left: -999px; }
+  .skip:focus { left: 1rem; top: 1rem; background: var(--white); padding: .5rem 1rem; z-index: 10; }
+
+  /* Header */
+  .site-header .wrap {
+    display: flex; align-items: center; justify-content: space-between;
+    padding-top: 1rem; padding-bottom: 1rem;
+  }
+  .site-header img { height: 5.5rem; width: auto; }
+  .site-header nav { display: flex; gap: 2rem; font-weight: 500; }
+  .site-header nav a { color: var(--ink); text-decoration: none; }
+  .site-header nav a:hover { color: var(--blue); text-decoration: underline; }
+
+  /* Hero */
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    min-height: min(42rem, 82vh);
+  }
+  .hero-text {
+    align-self: center;
+    padding: 4rem var(--gutter) 5rem max(var(--gutter), calc((100vw - var(--wrap)) / 2 + var(--gutter)));
+  }
+  .hero h1 {
+    font-size: clamp(3rem, 6.4vw, 5.5rem);
+    line-height: .98;
+    letter-spacing: -.02em;
+    margin-bottom: 1.75rem;
+  }
+  .hero .lead { margin-bottom: 2.5rem; max-width: 30em; }
+  .hero-photo { position: relative; }
+  .hero-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+  section { padding: clamp(4rem, 9vw, 7rem) 0; }
+
+  /* Sector network: the logo's connected spheres, sized by client count */
+  .clients { background: var(--cloud); }
+  .clients header { margin-bottom: 3rem; }
+  .clients header p { margin-top: 1rem; }
+
+  .network { position: relative; }
+  .network-line { position: absolute; left: 0; top: 0; width: 100%; height: 12rem; overflow: visible; }
+  .network-line polyline {
+    fill: none; stroke: var(--blue); stroke-width: 6; stroke-linecap: round; stroke-linejoin: round;
+    vector-effect: non-scaling-stroke;
+  }
+  .sectors {
+    list-style: none; margin: 0; padding: 0;
+    display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .sector { position: relative; padding: 13.5rem 1rem 0; }
+  .node {
+    position: absolute; left: 50%; top: var(--y);
+    width: var(--d); height: var(--d);
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: radial-gradient(circle at 34% 30%, var(--sphere) 0%, #3E6898 30%, var(--blue) 62%, #1A4470 100%);
+  }
+  .sector h3 { margin-bottom: .75rem; }
+  .sector ul { list-style: none; margin: 0; padding: 0; }
+  .sector li { padding: .55rem 0; border-top: 1px solid #D5DEE8; line-height: 1.35; }
+  .sector li small { display: block; font-size: .9375rem; color: var(--muted); }
+
+  /* One reveal: the line draws, then the spheres arrive */
+  .js .network-line { clip-path: inset(0 100% 0 0); }
+  .js .node { transform: translate(-50%, -50%) scale(0); }
+  .js .network.is-on .network-line { clip-path: inset(0 0 0 0); transition: clip-path 1.1s cubic-bezier(.6,0,.2,1); }
+  .js .network.is-on .node { transform: translate(-50%, -50%) scale(1); transition: transform .5s cubic-bezier(.3,1.5,.5,1) var(--delay); }
+
+  /* Approach */
+  .approach .wrap { display: grid; grid-template-columns: 5fr 6fr; gap: clamp(2rem, 6vw, 5rem); align-items: center; }
+  .approach img { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; object-position: 70% 50%; border-radius: 0 6rem 0 0; }
+  .approach h2 { margin-bottom: 1.5rem; }
+  .approach p + p { margin-top: 1.1rem; }
+  .scale { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2.5rem; }
+  .scale div { border-left: 4px solid var(--blue); padding-left: 1rem; }
+  .scale strong { display: block; font: 600 2rem/1.1 var(--display); color: var(--harbour); }
+  .scale span { color: var(--muted); }
+
+  /* Services */
+  .services { padding-top: 0; }
+  .services h2 { margin-bottom: 2.5rem; }
+  .services dl { display: grid; grid-template-columns: 1fr 1fr; gap: 0 clamp(2rem, 6vw, 5rem); margin: 0; }
+  .services dl div { padding: 1.5rem 0; border-top: 2px solid var(--harbour); }
+  .services dt { font: 500 1.375rem/1.2 var(--display); color: var(--harbour); margin-bottom: .5rem; }
+  .services dd { margin: 0; color: var(--muted); max-width: 30em; }
+
+  /* Contact */
+  .contact {
+    position: relative; color: var(--white);
+    background: var(--harbour) url("img/server-room.jpg") center / cover;
+    background-blend-mode: multiply;
+  }
+  .contact::before { content: ""; position: absolute; inset: 0; background: rgba(15, 42, 71, .72); }
+  .contact .wrap { position: relative; }
+  .contact h2 { color: var(--white); margin-bottom: 1rem; }
+  .contact p { color: #C9D6E5; }
+  .contact .email {
+    display: inline-block; margin-top: 2rem;
+    font: 600 clamp(1.75rem, 5vw, 3.5rem)/1.1 var(--display);
+    color: var(--white); text-decoration-thickness: 3px; text-decoration-color: var(--sphere);
+    overflow-wrap: anywhere;
+  }
+  .contact .email:hover { color: var(--sphere); }
+
+  footer { padding: 2rem 0; font-size: .9375rem; color: var(--muted); }
+
+  @media (max-width: 56rem) {
+    .site-header nav { display: none; }
+    .site-header img { height: 3.75rem; }
+    .hero { grid-template-columns: 1fr; min-height: 0; }
+    .hero-text { padding: 2.5rem var(--gutter) 3rem; }
+    .hero-photo { height: 16rem; order: -1; }
+
+    .network-line { display: none; }
+    .sectors { grid-template-columns: 1fr 1fr; gap: 2.5rem 2rem; }
+    .sector { padding: 0 0 0 4.25rem; min-height: 4rem; }
+    .node { left: 1.75rem; top: 1rem; width: calc(var(--d) * .5); height: calc(var(--d) * .5); }
+
+    .approach .wrap { grid-template-columns: 1fr; }
+    .approach img { aspect-ratio: 16 / 10; border-radius: 0 4rem 0 0; }
+    .services dl { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 36rem) {
+    .sectors { grid-template-columns: 1fr; }
+    .scale { grid-template-columns: 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .js .network-line { clip-path: none; }
+    .js .node { transform: translate(-50%, -50%); }
+    .js .network.is-on .network-line, .js .network.is-on .node { transition: none; }
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="/"><img src="kinect-it_logo.png" alt="Kinect IT – Moving your technology forward" width="1400" height="950"></a>
+    <nav aria-label="Main">
+      <a href="#clients">Clients</a>
+      <a href="#approach">Approach</a>
+      <a href="#services">Services</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="hero">
+    <div class="hero-text">
+      <h1>Do it right the first time.</h1>
+      <p class="lead">Kinect IT designs and delivers IT for organisations of 10 to 150,000 users, drawing on more than 20 years in finance, government, education and industry.</p>
+      <a class="button" href="mailto:info@kinect-it.com">Email info@kinect-it.com</a>
+    </div>
+    <div class="hero-photo">
+      <img src="img/patch-panel.jpg" alt="Blue network cables connected to a patch panel" width="1600" height="1067">
+    </div>
+  </div>
+
+  <section class="clients" id="clients" aria-labelledby="clients-title">
+    <div class="wrap">
+      <header class="measure">
+        <h2 id="clients-title">Where we’ve worked</h2>
+        <p class="lead">Professional services for organisations across the UK and abroad, in the public, private, educational and financial sectors.</p>
+      </header>
+
+      <div class="network">
+        <svg class="network-line" viewBox="0 0 100 192" preserveAspectRatio="none" aria-hidden="true">
+          <polyline points="12.5,120 37.5,56 62.5,100 87.5,140"/>
+        </svg>
+        <ul class="sectors">
+          <li class="sector">
+            <span class="node" style="--d:6.5rem; --y:7.5rem; --delay:.25s" aria-hidden="true"></span>
+            <h3>Public sector</h3>
+            <ul>
+              <li>The Scottish Parliament</li>
+              <li>The Scottish Government</li>
+              <li>BT <small>City of Edinburgh Council</small></li>
+              <li>Liberata UK <small>Westminster City Council</small></li>
+              <li>Scottish Canals</li>
+            </ul>
+          </li>
+          <li class="sector">
+            <span class="node" style="--d:5.5rem; --y:3.5rem; --delay:.45s" aria-hidden="true"></span>
+            <h3>Private sector</h3>
+            <ul>
+              <li>Edinburgh Airport <small>EAST expansion</small></li>
+              <li>Logica <small>CMG</small></li>
+              <li>Cadence Design Systems</li>
+              <li>Pentana Solutions</li>
+            </ul>
+          </li>
+          <li class="sector">
+            <span class="node" style="--d:4.5rem; --y:6.25rem; --delay:.65s" aria-hidden="true"></span>
+            <h3>Financial</h3>
+            <ul>
+              <li>Lloyds Banking Group</li>
+              <li>IBM <small>RBS / Williams &amp; Glyn</small></li>
+              <li>Royal London</li>
+            </ul>
+          </li>
+          <li class="sector">
+            <span class="node" style="--d:3.5rem; --y:8.75rem; --delay:.85s" aria-hidden="true"></span>
+            <h3>Education</h3>
+            <ul>
+              <li>National Library of Scotland</li>
+              <li>Student Loans Company</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="approach" id="approach" aria-labelledby="approach-title">
+    <div class="wrap">
+      <img src="img/meeting.jpg" alt="Colleagues discussing a project around a laptop" width="1600" height="1067" loading="lazy">
+      <div>
+        <h2 id="approach-title">Technology that works for you, not against you</h2>
+        <p class="lead">Every system or service should support the infrastructure it connects to. That’s the idea behind our name, and it shapes how we work.</p>
+        <p>We start by understanding what you already have and what you need it to do. Then we design and deliver a solution that fits, so it’s done properly once rather than patched later. The result saves you time and money, and gives you technology that keeps up as you grow.</p>
+        <div class="scale">
+          <div><strong>Up to 150 users</strong><span>Small businesses</span></div>
+          <div><strong>150,000+ users</strong><span>Large enterprises</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="services" id="services" aria-labelledby="services-title">
+    <div class="wrap">
+      <h2 id="services-title">How we can help</h2>
+      <dl>
+        <div>
+          <dt>IT strategy and architecture</dt>
+          <dd>Plan systems around how your organisation works, with room to grow.</dd>
+        </div>
+        <div>
+          <dt>Infrastructure and networks</dt>
+          <dd>Design, build and upgrade servers, networks, cloud services and end-user devices.</dd>
+        </div>
+        <div>
+          <dt>Project delivery</dt>
+          <dd>Lead migrations, rollouts and expansions from the first plan to the final handover.</dd>
+        </div>
+        <div>
+          <dt>Reviews and advice</dt>
+          <dd>Get an independent look at your current setup and clear advice on what to change first.</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="contact" id="contact" aria-labelledby="contact-title">
+    <div class="wrap">
+      <h2 id="contact-title">Talk to us about your project</h2>
+      <p class="measure">Tell us what you’re working on and we’ll get back to you.</p>
+      <a class="email" href="mailto:info@kinect-it.com">info@kinect-it.com</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>© 2009–2026 Kinect IT Limited. Registered in Scotland, company number SC363074.</p>
+  </div>
+</footer>
+
+<script>
+  document.documentElement.classList.add('js');
+  const net = document.querySelector('.network');
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver((entries, obs) => {
+      if (entries[0].isIntersecting) { net.classList.add('is-on'); obs.disconnect(); }
+    }, { threshold: .35 }).observe(net);
+  } else {
+    net.classList.add('is-on');
+  }
+</script>
+</body>
+</html>
